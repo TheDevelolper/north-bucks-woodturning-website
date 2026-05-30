@@ -2,7 +2,7 @@
 const { image, text } = Astro.props;
 const base = import.meta.env.BASE_URL;
 ---
-<div class="parallax-break" style="scroll-snap-align: start;">
+<div class="parallax-break">
   <div class="parallax-inner" style={`background-image: url('${image || base + 'hero.jpg'}')`}></div>
   {text && <div class="parallax-overlay"><p class="parallax-text">{text}</p></div>}
 </div>

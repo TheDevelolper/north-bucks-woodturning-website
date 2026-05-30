@@ -17,7 +17,7 @@ const base = import.meta.env.BASE_URL;
   <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`}>
   <style is:global>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-snap-type: y proximity; }
+    html { scroll-behavior: smooth; }
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       background: #0a0a0b;
@@ -29,8 +29,9 @@ const base = import.meta.env.BASE_URL;
 
     .section {
       padding: 6rem 2rem;
-      scroll-snap-align: start;
-      scroll-margin-top: 80px;
+      position: relative;
+      box-shadow: 0 -6px 24px rgba(0,0,0,0.5), 0 6px 24px rgba(0,0,0,0.5);
+      z-index: 1;
     }
     .section-dark { background: #0e0e10; }
     .section-divider { background: linear-gradient(180deg, #0a0a0b, #0e0e10); }
@@ -54,8 +55,6 @@ const base = import.meta.env.BASE_URL;
       text-align: center; padding: 3rem 2rem;
       border-top: 1px solid rgba(255,255,255,0.05);
       color: rgba(232,230,227,0.3); font-size: 0.8rem;
-      scroll-snap-align: start;
-      scroll-margin-top: 80px;
     }
 
     @media (max-width: 768px) {
