@@ -24,7 +24,7 @@ function mdToHtml(text: string) {
 }
 ---
 
-<section class="section section-dark" id={content.data.sectionType}>
+<section class="section section-dark section-about" id={content.data.sectionType}>
   <div class="container">
     <div class="section-label">{content.data.title}</div>
     <div class="about-grid">
@@ -45,6 +45,11 @@ function mdToHtml(text: string) {
 </section>
 
 <style is:global>
+  .section-about {
+    background:
+      linear-gradient(rgba(26,24,22,0.92), rgba(26,24,22,0.92)),
+      url('/hero.jpg') center/cover no-repeat;
+  }
   .about-grid {
     display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; align-items: center;
   }
