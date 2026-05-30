@@ -1,16 +1,24 @@
 ---
 interface Props {
   title?: string;
+  description?: string;
+  section?: string;
 }
-const { title } = Astro.props;
+const { title, description, section } = Astro.props;
 const base = import.meta.env.BASE_URL;
+const canonical = new URL(Astro.url.pathname, Astro.url.origin).href;
+const defaultTitle = 'North Bucks Woodturning Club';
+const pageTitle = title ? `${title} | ${defaultTitle}` : defaultTitle;
+const pageDescription = description || 'North Bucks Woodturning Club — sharing woodturning expertise, techniques, and camaraderie every Saturday in Stony Stratford, Milton Keynes.';
 ---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{title ? `${title} | North Bucks Woodturning Club` : 'North Bucks Woodturning Club'}</title>
+  <title>{pageTitle}</title>
+  <meta name="description" content={pageDescription}>
+  <link rel="canonical" href={canonical}>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
@@ -106,7 +114,7 @@ const base = import.meta.env.BASE_URL;
     }
   </style>
 </head>
-<body>
+<body data-section={section ?? undefined}>
   <slot />
   <script>
     const observer = new IntersectionObserver((entries) => {
@@ -127,6 +135,17 @@ const base = import.meta.env.BASE_URL;
       const video = document.querySelector('.hero-video');
       if (video) {
         video.play().catch(() => {});
+      }
+
+      const section = document.body.dataset.section;
+      if (section) {
+        const target = document.getElementById(section);
+        if (target) {
+          const html = document.documentElement;
+          html.style.scrollBehavior = 'auto';
+          target.scrollIntoView({ block: 'start' });
+          html.style.scrollBehavior = '';
+        }
       }
     });
 

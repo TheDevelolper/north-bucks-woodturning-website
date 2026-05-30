@@ -7,6 +7,6 @@ const sections = await getCollection('sections');
 sections.sort((a, b) => a.data.order - b.data.order);
 ---
 
-<BaseLayout>
+<BaseLayout title="Links" description="Useful links and resources for woodturners from North Bucks Woodturning Club." section="links">
   <PageContent sections={sections} />
 </BaseLayout>
