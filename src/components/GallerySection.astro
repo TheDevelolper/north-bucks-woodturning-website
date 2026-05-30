@@ -1,12 +1,24 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+
+const galleryDir = path.resolve('public/gallery');
+const imageExts = new Set(['.jpg', '.jpeg', '.png', '.webp']);
+const galleryImages = fs.readdirSync(galleryDir)
+  .filter(f => imageExts.has(path.extname(f).toLowerCase()))
+  .sort()
+  .map(f => `/gallery/${f}`);
+---
+
 <section class="section section-dark" id="gallery">
   <div class="container">
     <div class="section-label" data-animate>Gallery</div>
     <h2 class="section-title" data-animate>Our Work</h2>
     <p class="section-sub" data-animate>A glimpse into the craftsmanship and creativity of our members.</p>
     <div class="gallery-preview" data-stagger>
-      {Array.from({ length: 16 }, (_, i) => (
+      {galleryImages.map(src => (
         <div class="gallery-item" data-animate="scale-in">
-          <img src={`/gallery/thumb_${String(i + 1).padStart(2, '0')}.jpg`} alt="Woodturning project" loading="lazy" />
+          <img src={src} alt="Woodturning project" loading="lazy" />
         </div>
       ))}
     </div>

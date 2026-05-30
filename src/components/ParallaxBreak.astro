@@ -1,5 +1,9 @@
+---
+const { image, text } = Astro.props;
+---
 <div class="parallax-break">
-  <div class="parallax-inner" style={`background-image: url('${Astro.props.image || '/hero.jpg'}')`}></div>
+  <div class="parallax-inner" style={`background-image: url('${image || '/hero.jpg'}')`}></div>
+  {text && <div class="parallax-overlay"><p class="parallax-text">{text}</p></div>}
 </div>
 
 <script>
@@ -9,8 +13,12 @@
 
     const obs = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        const inner = entry.target.querySelector('.parallax-inner');
-        if (inner) inner.style.opacity = entry.intersectionRatio;
+        const el = entry.target;
+        const ratio = entry.intersectionRatio;
+        const inner = el.querySelector('.parallax-inner');
+        const overlay = el.querySelector('.parallax-overlay');
+        if (inner) inner.style.opacity = ratio;
+        if (overlay) overlay.style.opacity = ratio;
       });
     }, { threshold: steps });
 
@@ -31,7 +39,23 @@
     transition: opacity 0.15s ease;
   }
 
+  .parallax-overlay {
+    position: absolute; inset: 0; z-index: 1;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; will-change: opacity;
+    transition: opacity 0.15s ease;
+    background: rgba(0,0,0,0.35);
+  }
+  .parallax-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 3.5rem);
+    color: #fff; text-align: center; max-width: 600px;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.6), 0 4px 40px rgba(0,0,0,0.4);
+    padding: 0 2rem;
+  }
+
   @media (max-width: 768px) {
     .parallax-break { height: 40vh; min-height: 250px; }
+    .parallax-text { font-size: 1.2rem; }
   }
 </style>

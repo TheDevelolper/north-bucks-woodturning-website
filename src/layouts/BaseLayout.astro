@@ -74,14 +74,15 @@ const { title } = Astro.props;
       animation: scaleIn 0.6s ease-out forwards;
     }
     [data-stagger] > [data-animate] { opacity: 0; transform: translateY(30px); }
-    [data-stagger].is-visible > [data-animate]:nth-child(1) { animation: fadeUp 0.6s ease-out 0.05s forwards; }
-    [data-stagger].is-visible > [data-animate]:nth-child(2) { animation: fadeUp 0.6s ease-out 0.15s forwards; }
-    [data-stagger].is-visible > [data-animate]:nth-child(3) { animation: fadeUp 0.6s ease-out 0.25s forwards; }
-    [data-stagger].is-visible > [data-animate]:nth-child(4) { animation: fadeUp 0.6s ease-out 0.35s forwards; }
-    [data-stagger].is-visible > [data-animate]:nth-child(5) { animation: fadeUp 0.6s ease-out 0.45s forwards; }
-    [data-stagger].is-visible > [data-animate]:nth-child(6) { animation: fadeUp 0.6s ease-out 0.55s forwards; }
-    [data-stagger].is-visible > [data-animate]:nth-child(7) { animation: fadeUp 0.6s ease-out 0.65s forwards; }
-    [data-stagger].is-visible > [data-animate]:nth-child(8) { animation: fadeUp 0.6s ease-out 0.75s forwards; }
+    [data-stagger].is-visible > [data-animate] { animation: fadeUp 0.6s ease-out forwards; }
+    [data-stagger].is-visible > [data-animate]:nth-child(2) { animation-delay: 0.1s; }
+    [data-stagger].is-visible > [data-animate]:nth-child(3) { animation-delay: 0.2s; }
+    [data-stagger].is-visible > [data-animate]:nth-child(4) { animation-delay: 0.3s; }
+    [data-stagger].is-visible > [data-animate]:nth-child(5) { animation-delay: 0.4s; }
+    [data-stagger].is-visible > [data-animate]:nth-child(6) { animation-delay: 0.5s; }
+    [data-stagger].is-visible > [data-animate]:nth-child(7) { animation-delay: 0.6s; }
+    [data-stagger].is-visible > [data-animate]:nth-child(8) { animation-delay: 0.7s; }
+    [data-stagger].is-visible > [data-animate]:nth-child(n+9) { animation-delay: 0.8s; }
 
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(30px); }

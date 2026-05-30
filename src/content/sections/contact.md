@@ -1,6 +1,6 @@
 ---
 title: Get in Touch
-order: 5
+order: 3
 sectionType: contact
 ---
 
