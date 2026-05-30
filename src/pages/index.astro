@@ -28,7 +28,7 @@ const sectionComponents: Record<string, any> = {
   {sections.map(entry => {
     const Component = sectionComponents[entry.data.sectionType];
     return <>
-      {entry.data.sectionType === 'faqs' && <ParallaxBreak image={`${base}heros/hero2.jpeg`} text="A join our warm community of fellow woodturners" />}
+      {entry.data.sectionType === 'faqs' && <ParallaxBreak text="A join our warm community of fellow woodturners" />}
       {entry.data.sectionType === 'contact' && <ParallaxBreak image={`${base}heros/hero3.jpeg`} text="Learn new skills along the way" />}
       {Component ? <Component content={entry} /> : null}
       {entry.data.sectionType === 'faqs' && <GallerySection />}
