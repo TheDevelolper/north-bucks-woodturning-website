@@ -31,7 +31,7 @@ const sectionComponents: Record<string, any> = {
   return <>
     {entry.data.sectionType === 'faqs' && <ParallaxBreak text="Craft wonderful things" />}
     {entry.data.sectionType === 'contact' && <ParallaxBreak image={`${base}heros/hero3.png`} text="Learn new skills" />}
-    {Component ? <Component content={entry} /> : null}
+    {Component ? <Component content={entry} base={base} /> : null}
     {entry.data.sectionType === 'faqs' && <GallerySection />}
     {entry.data.sectionType === 'contact' && <ParallaxBreak image={`${base}heros/hero2.jpg`} text="Join our warm community of fellow woodturners" />}
   </>;

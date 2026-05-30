@@ -1,5 +1,6 @@
 ---
-const { content } = Astro.props;
+const { content, base: baseUrl } = Astro.props;
+const base = baseUrl;
 
 const body = content.body || '';
 const parts = body.split(/\n(?=### )/);
@@ -39,7 +40,7 @@ function mdToHtml(text: string) {
           const mapsUrl = d.heading === 'Where'
             ? `https://www.google.com/maps?q=${encodeURIComponent(d.body.replace(/<[^>]*>/g, '').replace(/\n/g, ' '))}`
             : null;
-          const calIcsUrl = d.heading === 'When' ? '/nbwc-sessions.ics' : null;
+          const calIcsUrl = d.heading === 'When' ? base + 'nbwc-sessions.ics' : null;
           return (
             <div class="detail-card" data-animate>
               <h4>{d.heading}</h4>
@@ -51,8 +52,8 @@ function mdToHtml(text: string) {
   document.addEventListener('click', (e) => {
     const btn = e.target.closest('.calendar-btn');
     if (!btn) return;
-    const webcal = `webcal://${location.host}/nbwc-sessions.ics`;
-    window.open(webcal);
+    e.preventDefault();
+    window.location.href = 'webcal://' + location.host + btn.getAttribute('href');
   });
 </script>
             </div>
