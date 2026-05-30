@@ -117,7 +117,7 @@ const { title } = Astro.props;
       document.querySelectorAll('[data-animate]').forEach(el => {
         if (!el.closest('[data-stagger]')) observer.observe(el);
       });
-      document.querySelectorAll('[data-stagger]').forEach(el => observer.observe(el));
+      document.querySelectorAll('[data-stagger], [data-parallax]').forEach(el => observer.observe(el));
     });
 
     let ticking = false;

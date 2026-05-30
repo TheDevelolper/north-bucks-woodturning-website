@@ -1,0 +1,19 @@
+<div class="parallax-break">
+  <div class="parallax-inner" style={`background-image: url('${Astro.props.image || '/hero.jpg'}')`}></div>
+</div>
+
+<style is:global>
+  .parallax-break {
+    height: 60vh; min-height: 400px;
+    position: relative; overflow: hidden;
+  }
+  .parallax-inner {
+    position: absolute; inset: -20% 0;
+    background-size: cover; background-position: center;
+    background-repeat: no-repeat; background-attachment: fixed;
+  }
+
+  @media (max-width: 768px) {
+    .parallax-break { height: 40vh; min-height: 250px; }
+  }
+</style>

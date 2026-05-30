@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Hero from '../components/Hero.astro';
 import AboutSection from '../components/AboutSection.astro';
+import ParallaxBreak from '../components/ParallaxBreak.astro';
 import FaqsSection from '../components/FaqsSection.astro';
 import GallerySection from '../components/GallerySection.astro';
 import LinksSection from '../components/LinksSection.astro';
@@ -25,8 +26,13 @@ const sectionComponents: Record<string, any> = {
   <Hero />
   {sections.map(entry => {
     const Component = sectionComponents[entry.data.sectionType];
-    return Component ? <Component content={entry} /> : null;
+    return <>
+      {entry.data.sectionType === 'faqs' && <ParallaxBreak />}
+      {entry.data.sectionType === 'contact' && <ParallaxBreak image="/heros/hero2.jpeg" />}
+      {Component ? <Component content={entry} /> : null}
+    </>;
   })}
+  <ParallaxBreak image="/heros/hero3.jpeg" />
   <GallerySection />
   <footer>
     &copy; 2024 North Bucks Woodturning Club. All rights reserved.
