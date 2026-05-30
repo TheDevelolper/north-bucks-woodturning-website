@@ -4,7 +4,7 @@ order: 1
 sectionType: about
 ---
 
-North Bucks Woodturning Club (formerly North Bucks Woodturners) has been bringing together woodturning enthusiasts since the early 1990s. Whether you're a seasoned turner or picking up a gouge for the first time, you'll find a warm welcome and a wealth of shared knowledge.
+North Bucks Woodturning Club (formerly North Bucks Woodturners) has been bringing together woodturning enthusiasts since the early 1990's. Whether you're a seasoned turner or picking up a gouge for the first time, you'll find a warm welcome and a wealth of shared knowledge.
 
 We meet every Saturday at the York House Centre in Stony Stratford, Milton Keynes. We have sessions running twice a week, giving members plenty of time to swap tips, work on projects, and enjoy the company of fellow woodturners.
 
