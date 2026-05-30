@@ -28,10 +28,10 @@ const sectionComponents: Record<string, any> = {
     const Component = sectionComponents[entry.data.sectionType];
     return <>
       {entry.data.sectionType === 'faqs' && <ParallaxBreak text="A join our warm community of fellow woodturners" />}
-      {entry.data.sectionType === 'contact' && <ParallaxBreak image="/heros/hero3.jpeg" text="We Create, We Learn, We Improve, We Share" />}
+      {entry.data.sectionType === 'contact' && <ParallaxBreak image="/heros/hero3.jpeg" text="Learn new skills along the way" />}
       {Component ? <Component content={entry} /> : null}
       {entry.data.sectionType === 'faqs' && <GallerySection />}
-      {entry.data.sectionType === 'contact' && <ParallaxBreak image="/heros/hero2.jpeg" text="Create something beautiful with your own hands" />}
+      {entry.data.sectionType === 'contact' && <ParallaxBreak image="/heros/hero2.jpeg" text="Create beautiful things, meet lovely people." />}
     </>;
   })}
   <footer>
