@@ -12,6 +12,9 @@ const details = parts.slice(1).map(part => {
   return { heading, body: bodyText };
 });
 
+import openingTimesRaw from '../content/sections/_opening-times.md?raw';
+details.push({ heading: 'When', body: openingTimesRaw.trim() });
+
 function mdToHtml(text: string) {
   return text.split(/\n\n+/).map(p => {
     p = p.trim();

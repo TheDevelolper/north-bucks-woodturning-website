@@ -1,5 +1,7 @@
 ---
 const { content } = Astro.props;
+import openingTimesRaw from '../content/sections/_opening-times.md?raw';
+const openingLines = openingTimesRaw.trim().split('\n');
 ---
 
 <section class="section section-dark" id="contact">
@@ -13,10 +15,12 @@ const { content } = Astro.props;
           <span class="icon">&#9906;</span>
           <p>York House Centre, London Road, Stony Stratford,<br>Milton Keynes MK11 1JQ</p>
         </div>
-        <div class="contact-detail">
-          <span class="icon">&#128338;</span>
-          <p>Saturdays · 9:30am – 1:30pm</p>
-        </div>
+        {openingLines.map(line => (
+          <div class="contact-detail">
+            <span class="icon">&#128338;</span>
+            <p>{line}</p>
+          </div>
+        ))}
       </div>
       <form class="contact-form" netlify>
         <input type="text" name="name" placeholder="Your Name" required>
