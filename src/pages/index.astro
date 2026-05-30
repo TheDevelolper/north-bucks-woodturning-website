@@ -9,6 +9,7 @@ import GallerySection from '../components/GallerySection.astro';
 import LinksSection from '../components/LinksSection.astro';
 import ContactSection from '../components/ContactSection.astro';
 import { getCollection } from 'astro:content';
+import { site } from '../data/site';
 
 const base = import.meta.env.BASE_URL;
 const sections = await getCollection('sections');

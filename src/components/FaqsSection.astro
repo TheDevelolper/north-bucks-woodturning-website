@@ -1,5 +1,6 @@
 ---
 const { content } = Astro.props;
+import { site } from '../data/site';
 
 const body = content.body || '';
 const lines = body.split('\n');
@@ -10,8 +11,11 @@ for (let i = 0; i < lines.length; i++) {
     const q = line;
     const next = lines[i + 1]?.trim();
     if (next?.startsWith(': ')) {
-      const a = next.slice(2).trim()
+      let a = next.slice(2).trim()
         .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+      if (q === 'How much does it cost?') {
+        a = `Annual <strong>AWGB membership</strong> is £${site.membershipAnnualFee}, then monthly subs are £${site.membershipMonthlyFee} per month.`;
+      }
       items.push({ q, a });
       i++;
     }
