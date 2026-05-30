@@ -56,7 +56,10 @@
 </style>
 
 <script>
-  document.getElementById('mobileToggle')?.addEventListener('click', () => {
-    document.getElementById('navLinks')?.classList.toggle('open');
+  const navLinks = document.getElementById('navLinks');
+  const toggle = document.getElementById('mobileToggle');
+  toggle?.addEventListener('click', () => navLinks?.classList.toggle('open'));
+  navLinks?.addEventListener('click', (e) => {
+    if (e.target.closest('a')) navLinks.classList.remove('open');
   });
 </script>
