@@ -10,6 +10,7 @@ import LinksSection from '../components/LinksSection.astro';
 import ContactSection from '../components/ContactSection.astro';
 import { getCollection } from 'astro:content';
 
+const base = import.meta.env.BASE_URL;
 const sections = await getCollection('sections');
 sections.sort((a, b) => a.data.order - b.data.order);
 
@@ -28,10 +29,10 @@ const sectionComponents: Record<string, any> = {
     const Component = sectionComponents[entry.data.sectionType];
     return <>
       {entry.data.sectionType === 'faqs' && <ParallaxBreak text="A join our warm community of fellow woodturners" />}
-      {entry.data.sectionType === 'contact' && <ParallaxBreak image="/heros/hero3.jpeg" text="Learn new skills along the way" />}
+      {entry.data.sectionType === 'contact' && <ParallaxBreak image={`${base}heros/hero3.jpeg`} text="Learn new skills along the way" />}
       {Component ? <Component content={entry} /> : null}
       {entry.data.sectionType === 'faqs' && <GallerySection />}
-      {entry.data.sectionType === 'contact' && <ParallaxBreak image="/heros/hero2.jpeg" text="Create beautiful things, meet lovely people." />}
+      {entry.data.sectionType === 'contact' && <ParallaxBreak image={`${base}heros/hero2.jpeg`} text="Create beautiful things, meet lovely people." />}
     </>;
   })}
   <footer>
