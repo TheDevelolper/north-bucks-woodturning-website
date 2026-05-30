@@ -53,7 +53,12 @@ function mdToHtml(text: string) {
     const btn = e.target.closest('.calendar-btn');
     if (!btn) return;
     e.preventDefault();
-    window.location.href = 'webcal://' + location.host + btn.getAttribute('href');
+    const icsUrl = 'https://' + location.host + btn.getAttribute('href');
+    if (/iphone|ipad|mac/i.test(navigator.userAgent)) {
+      window.location.href = 'webcal://' + location.host + btn.getAttribute('href');
+    } else {
+      window.location.href = icsUrl;
+    }
   });
 </script>
             </div>
