@@ -1,0 +1,67 @@
+---
+const { content } = Astro.props;
+
+const body = content.body || '';
+const parts = body.split(/\n(?=### )/);
+const introMd = parts[0] || '';
+
+const details = parts.slice(1).map(part => {
+  const lines = part.trim().split('\n');
+  const heading = lines[0].replace(/^###\s+/, '');
+  const bodyText = lines.slice(1).join('\n').trim();
+  return { heading, body: bodyText };
+});
+
+function mdToHtml(text: string) {
+  return text.split(/\n\n+/).map(p => {
+    p = p.trim();
+    if (!p) return '';
+    return `<p>${p.replace(/\n/g, '<br>')}</p>`;
+  }).join('\n');
+}
+---
+
+<section class="section section-dark" id={content.data.sectionType}>
+  <div class="container">
+    <div class="section-label">{content.data.title}</div>
+    <div class="about-grid">
+      <div class="about-text">
+        <h2 class="section-title">{content.data.title}</h2>
+        <Fragment set:html={mdToHtml(introMd)} />
+      </div>
+      <div class="about-details">
+        {details.map(d => (
+          <div class="detail-card">
+            <h4>{d.heading}</h4>
+            <Fragment set:html={mdToHtml(d.body)} />
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .about-grid {
+    display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; align-items: center;
+  }
+  .about-text p { color: rgba(232,230,227,0.7); margin-bottom: 1.2rem; font-size: 0.95rem; }
+  .about-details {
+    display: grid; gap: 1.5rem;
+  }
+  .detail-card {
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px; padding: 1.5rem;
+    transition: all 0.3s;
+  }
+  .detail-card:hover {
+    background: rgba(166,124,82,0.05); border-color: rgba(166,124,82,0.2);
+    transform: translateY(-2px);
+  }
+  .detail-card h4 { color: #a67c52; font-size: 1rem; font-weight: 600; margin-bottom: 0.3rem; }
+  .detail-card p { color: rgba(232,230,227,0.6); font-size: 0.9rem; }
+
+  @media (max-width: 768px) {
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+  }
+</style>

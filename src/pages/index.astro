@@ -1,17 +1,34 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import AboutSection from '../components/AboutSection.astro';
+import FaqsSection from '../components/FaqsSection.astro';
+import GallerySection from '../components/GallerySection.astro';
+import LinksSection from '../components/LinksSection.astro';
+import ContactSection from '../components/ContactSection.astro';
+import { getCollection } from 'astro:content';
 
+const sections = await getCollection('sections');
+sections.sort((a, b) => a.data.order - b.data.order);
+
+const sectionComponents: Record<string, any> = {
+  about: AboutSection,
+  faqs: FaqsSection,
+  links: LinksSection,
+  contact: ContactSection,
+};
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout>
+  <Nav />
+  <Hero />
+  {sections.map(entry => {
+    const Component = sectionComponents[entry.data.sectionType];
+    return Component ? <Component content={entry} /> : null;
+  })}
+  <GallerySection />
+  <footer>
+    &copy; 2024 North Bucks Woodturning Club. All rights reserved.
+  </footer>
+</BaseLayout>

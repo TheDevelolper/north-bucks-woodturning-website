@@ -1,0 +1,53 @@
+---
+const { content } = Astro.props;
+
+const body = content.body || '';
+const links: { name: string; url: string; desc: string }[] = [];
+const linkRegex = /-\s+\[([^\]]+)\]\(([^)]+)\)\s*[—–-]?\s*(.+)/g;
+let m;
+while ((m = linkRegex.exec(body)) !== null) {
+  links.push({
+    name: m[1],
+    url: m[2],
+    desc: m[3].trim(),
+  });
+}
+---
+
+<section class="section section-divider" id="links">
+  <div class="container">
+    <div class="section-label">Resources</div>
+    <h2 class="section-title">Useful Links</h2>
+    <p class="section-sub">Trusted suppliers, associations, and resources for the woodturning community.</p>
+    <div class="links-grid">
+      {links.map(link => (
+        <a href={link.url} target="_blank" rel="noopener" class="link-card">
+          <div>
+            <div class="link-name">{link.name}</div>
+            <div class="link-desc">{link.desc}</div>
+          </div>
+          <span class="link-arrow">&rarr;</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .links-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem;
+  }
+  .link-card {
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 10px; padding: 1.2rem 1.5rem; text-decoration: none;
+    display: flex; justify-content: space-between; align-items: center;
+    transition: all 0.3s; color: #e8e6e3;
+  }
+  .link-card:hover {
+    border-color: rgba(166,124,82,0.3); background: rgba(166,124,82,0.05);
+    transform: translateX(4px);
+  }
+  .link-card .link-name { font-weight: 500; font-size: 0.95rem; }
+  .link-card .link-desc { color: rgba(232,230,227,0.45); font-size: 0.8rem; }
+  .link-card .link-arrow { color: #a67c52; font-size: 1.2rem; }
+</style>

@@ -1,0 +1,64 @@
+---
+interface Props {
+  title?: string;
+}
+const { title } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title ? `${title} | North Bucks Woodturning Club` : 'North Bucks Woodturning Club'}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <style is:global>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #0a0a0b;
+      color: #e8e6e3;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    ::selection { background: #a67c52; color: #fff; }
+
+    .section {
+      padding: 6rem 2rem;
+    }
+    .section-dark { background: #0e0e10; }
+    .section-divider { background: linear-gradient(180deg, #0a0a0b, #0e0e10); }
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    .section-label {
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
+      color: #a67c52; margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 600;
+      margin-bottom: 1rem; color: #fff;
+    }
+    .section-sub {
+      color: rgba(232,230,227,0.5); font-size: 1rem; font-weight: 300;
+      max-width: 600px; margin-bottom: 3rem;
+    }
+
+    footer {
+      text-align: center; padding: 3rem 2rem;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      color: rgba(232,230,227,0.3); font-size: 0.8rem;
+    }
+
+    @media (max-width: 768px) {
+      .section { padding: 4rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <slot />
+</body>
+</html>

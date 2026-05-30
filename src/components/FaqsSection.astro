@@ -1,0 +1,54 @@
+---
+const { content } = Astro.props;
+
+const body = content.body || '';
+const lines = body.split('\n');
+const items: { q: string; a: string }[] = [];
+for (let i = 0; i < lines.length; i++) {
+  const line = lines[i].trim();
+  if (line && !line.startsWith(':')) {
+    const q = line;
+    const next = lines[i + 1]?.trim();
+    if (next?.startsWith(': ')) {
+      const a = next.slice(2).trim()
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+      items.push({ q, a });
+      i++;
+    }
+  }
+}
+---
+
+<section class="section section-divider" id="faqs">
+  <div class="container">
+    <div class="section-label">{content.data.title}</div>
+    <h2 class="section-title">Everything You Need to Know</h2>
+    <p class="section-sub">Got questions? We've got answers.</p>
+    <div class="cards-grid">
+      {items.map(item => (
+        <div class="faq-card">
+          <h4>{item.q}</h4>
+          <Fragment set:html={item.a} />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .cards-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem;
+  }
+  .faq-card {
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px; padding: 1.8rem;
+    transition: all 0.3s;
+  }
+  .faq-card:hover {
+    border-color: rgba(166,124,82,0.2); background: rgba(166,124,82,0.03);
+    transform: translateY(-2px);
+  }
+  .faq-card h4 { color: #fff; font-size: 1rem; font-weight: 600; margin-bottom: 0.6rem; }
+  .faq-card p { color: rgba(232,230,227,0.55); font-size: 0.9rem; line-height: 1.6; }
+  .faq-card strong { color: #a67c52; }
+</style>
