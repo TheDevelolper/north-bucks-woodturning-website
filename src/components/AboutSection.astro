@@ -28,13 +28,13 @@ function mdToHtml(text: string) {
   <div class="container">
     <div class="section-label">{content.data.title}</div>
     <div class="about-grid">
-      <div class="about-text">
+      <div class="about-text" data-animate="fade-left">
         <h2 class="section-title">{content.data.title}</h2>
         <Fragment set:html={mdToHtml(introMd)} />
       </div>
-      <div class="about-details">
+      <div class="about-details" data-stagger>
         {details.map(d => (
-          <div class="detail-card">
+          <div class="detail-card" data-animate>
             <h4>{d.heading}</h4>
             <Fragment set:html={mdToHtml(d.body)} />
           </div>

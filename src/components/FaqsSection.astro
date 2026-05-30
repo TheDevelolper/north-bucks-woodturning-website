@@ -21,12 +21,12 @@ for (let i = 0; i < lines.length; i++) {
 
 <section class="section section-divider" id="faqs">
   <div class="container">
-    <div class="section-label">{content.data.title}</div>
-    <h2 class="section-title">Everything You Need to Know</h2>
-    <p class="section-sub">Got questions? We've got answers.</p>
-    <div class="cards-grid">
+    <div class="section-label" data-animate>{content.data.title}</div>
+    <h2 class="section-title" data-animate>Everything You Need to Know</h2>
+    <p class="section-sub" data-animate>Got questions? We've got answers.</p>
+    <div class="cards-grid" data-stagger>
       {items.map(item => (
-        <div class="faq-card">
+        <div class="faq-card" data-animate>
           <h4>{item.q}</h4>
           <Fragment set:html={item.a} />
         </div>

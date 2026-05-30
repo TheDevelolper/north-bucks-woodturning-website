@@ -16,12 +16,12 @@ while ((m = linkRegex.exec(body)) !== null) {
 
 <section class="section section-divider" id="links">
   <div class="container">
-    <div class="section-label">Resources</div>
-    <h2 class="section-title">Useful Links</h2>
-    <p class="section-sub">Trusted suppliers, associations, and resources for the woodturning community.</p>
-    <div class="links-grid">
+    <div class="section-label" data-animate>Resources</div>
+    <h2 class="section-title" data-animate>Useful Links</h2>
+    <p class="section-sub" data-animate>Trusted suppliers, associations, and resources for the woodturning community.</p>
+    <div class="links-grid" data-stagger>
       {links.map(link => (
-        <a href={link.url} target="_blank" rel="noopener" class="link-card">
+        <a href={link.url} target="_blank" rel="noopener" class="link-card" data-animate>
           <div>
             <div class="link-name">{link.name}</div>
             <div class="link-desc">{link.desc}</div>

@@ -1,11 +1,11 @@
 <section class="section section-dark" id="gallery">
   <div class="container">
-    <div class="section-label">Gallery</div>
-    <h2 class="section-title">Our Work</h2>
-    <p class="section-sub">A glimpse into the craftsmanship and creativity of our members.</p>
-    <div class="gallery-preview">
+    <div class="section-label" data-animate>Gallery</div>
+    <h2 class="section-title" data-animate>Our Work</h2>
+    <p class="section-sub" data-animate>A glimpse into the craftsmanship and creativity of our members.</p>
+    <div class="gallery-preview" data-stagger>
       {Array.from({ length: 16 }, (_, i) => (
-        <div class="gallery-item">
+        <div class="gallery-item" data-animate="scale-in">
           <img src={`/gallery/thumb_${String(i + 1).padStart(2, '0')}.jpg`} alt="Woodturning project" loading="lazy" />
         </div>
       ))}
