@@ -3,11 +3,12 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const galleryDir = path.resolve('public/gallery');
+const base = import.meta.env.BASE_URL;
 const imageExts = new Set(['.jpg', '.jpeg', '.png', '.webp']);
 const galleryImages = fs.readdirSync(galleryDir)
   .filter(f => imageExts.has(path.extname(f).toLowerCase()))
   .sort()
-  .map(f => `/gallery/${f}`);
+  .map(f => `${base}gallery/${f}`);
 ---
 
 <section class="section section-dark" id="gallery">

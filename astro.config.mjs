@@ -4,5 +4,6 @@ import { defineConfig } from 'astro/config';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://TheDevelolper.github.io',
-  base: '/north-bucks-woodturning-website',
+  trailingSlash: 'always',
+  base: '/north-bucks-woodturning-website/',
 });
