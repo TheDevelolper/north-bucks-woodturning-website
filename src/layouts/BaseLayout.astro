@@ -123,6 +123,11 @@ const base = import.meta.env.BASE_URL;
         if (!el.closest('[data-stagger]')) observer.observe(el);
       });
       document.querySelectorAll('[data-stagger], [data-parallax]').forEach(el => observer.observe(el));
+
+      const video = document.querySelector('.hero-video');
+      if (video) {
+        video.play().catch(() => {});
+      }
     });
 
     let ticking = false;
