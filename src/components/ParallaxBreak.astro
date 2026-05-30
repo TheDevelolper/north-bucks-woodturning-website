@@ -2,6 +2,22 @@
   <div class="parallax-inner" style={`background-image: url('${Astro.props.image || '/hero.jpg'}')`}></div>
 </div>
 
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const steps = [];
+    for (let i = 0; i <= 1; i += 0.05) steps.push(i);
+
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const inner = entry.target.querySelector('.parallax-inner');
+        if (inner) inner.style.opacity = entry.intersectionRatio;
+      });
+    }, { threshold: steps });
+
+    document.querySelectorAll('.parallax-break').forEach(el => obs.observe(el));
+  });
+</script>
+
 <style is:global>
   .parallax-break {
     height: 60vh; min-height: 400px;
@@ -11,6 +27,8 @@
     position: absolute; inset: -20% 0;
     background-size: cover; background-position: center;
     background-repeat: no-repeat; background-attachment: fixed;
+    opacity: 0; will-change: opacity;
+    transition: opacity 0.15s ease;
   }
 
   @media (max-width: 768px) {
