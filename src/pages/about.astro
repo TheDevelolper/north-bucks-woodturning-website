@@ -2,11 +2,12 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageContent from '../components/PageContent.astro';
 import { getCollection } from 'astro:content';
+import { meetingDaysPhrase } from '../data/utils';
 
 const sections = await getCollection('sections');
 sections.sort((a, b) => a.data.order - b.data.order);
 ---
 
-<BaseLayout title="About Us" description="Learn about North Bucks Woodturning Club — meeting every Saturday at York House Centre in Stony Stratford, Milton Keynes." section="about">
+<BaseLayout title="About Us" description={`Learn about North Bucks Woodturning Club — meeting ${meetingDaysPhrase()} at York House Centre in Stony Stratford, Milton Keynes.`} section="about">
   <PageContent sections={sections} />
 </BaseLayout>

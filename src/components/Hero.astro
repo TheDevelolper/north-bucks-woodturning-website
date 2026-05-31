@@ -1,4 +1,5 @@
 ---
+import { meetingDaysPhrase } from '../data/utils';
 const base = import.meta.env.BASE_URL;
 ---
 <section class="hero" id="home">
@@ -8,7 +9,7 @@ const base = import.meta.env.BASE_URL;
   <div class="hero-content">
     <div class="hero-badge">EST. 1990's</div>
     <h1>Craft. Creativity.<br>Community.</h1>
-    <p>North Bucks Woodturning Club — sharing woodturning expertise, techniques, and camaraderie every Saturday in Stony Stratford.</p>
+    <p>Sharing woodturning expertise, techniques, and camaraderie {meetingDaysPhrase()} in Stony Stratford.</p>
     <div class="hero-buttons">
       <a href="#about" class="btn btn-primary">Discover More</a>
       <a href="#contact" class="btn btn-outline">Join Us</a>
