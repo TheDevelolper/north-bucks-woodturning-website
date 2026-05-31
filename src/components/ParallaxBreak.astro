@@ -3,53 +3,70 @@ const { image, text } = Astro.props;
 const base = import.meta.env.BASE_URL;
 ---
 <div class="parallax-break">
-  <div class="parallax-inner" data-speed="0.2" style={`background-image: url('${image || base + 'heros/hero.png'}')`}></div>
+  <div class="parallax-inner" style={`background-image: url('${image || base + 'heros/hero.png'}')`}></div>
   {text && <div class="parallax-overlay"><p class="parallax-text">{text}</p></div>}
 </div>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const steps = [];
-    for (let i = 0; i <= 1; i += 0.05) steps.push(i);
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        const el = entry.target;
-        const ratio = entry.intersectionRatio;
+    const breaks = document.querySelectorAll('.parallax-break');
+    if (!breaks.length) return;
+
+    function updateParallax() {
+      const vh = window.innerHeight;
+      const vc = vh / 2;
+      breaks.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        const ec = rect.top + rect.height / 2;
+        const dist = ec - vc;
+
+        const ratio = Math.max(0, Math.min(1, 1 - Math.abs(dist) / (vh * 0.75)));
+
         const inner = el.querySelector('.parallax-inner');
         const overlay = el.querySelector('.parallax-overlay');
         if (inner) {
           inner.style.opacity = ratio;
-          const zoom = 200 + (1- ratio) * 200;
-          inner.style.backgroundSize = `${zoom}%`;
+          inner.style.scale = 1 + (1 - ratio) * 0.8;
         }
-        if (overlay) overlay.style.opacity = ratio;
+        if (overlay) {
+          overlay.style.opacity = ratio * 0.9;
+        }
       });
-    }, { threshold: steps });
+    }
 
-    document.querySelectorAll('.parallax-break').forEach(el => obs.observe(el));
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          updateParallax();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    updateParallax();
   });
 </script>
 
 <style is:global>
   .parallax-break {
     height: 90vh;
-    position: relative; 
+    position: relative;
     overflow: hidden;
   }
   .parallax-inner {
-    position: absolute; inset: -20% 0;
+    position: absolute; inset: 0;
     background-size: cover; background-position: center;
     background-repeat: no-repeat;
-    opacity: 0; will-change: opacity, background-size, transform;
-    transition: opacity 0.15s ease, background-size 0.15s ease;
+    opacity: 0; will-change: opacity, scale;
   }
 
   .parallax-overlay {
     position: absolute; inset: 0; z-index: 1;
     display: flex; align-items: center; justify-content: center;
     opacity: 0; will-change: opacity;
-    transition: opacity 0.15s ease;
-    background: rgba(0,0,0,0.35);
+    background: rgba(20,16,12,0.4);
   }
   .parallax-text {
     font-family: 'Playfair Display', serif;
@@ -62,9 +79,8 @@ const base = import.meta.env.BASE_URL;
 
   @media (max-width: 768px) {
     .parallax-break { height: 90vh; }
-    .parallax-inner { inset: 0; }
-    .parallax-text { 
-      font-size: 12vw; 
+    .parallax-text {
+      font-size: 12vw;
       text-shadow: 0 5px 5px rgba(0,0,0,0.9), 0 4px 40px rgba(0,0,0,0.4);
     }
   }
