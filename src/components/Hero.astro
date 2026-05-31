@@ -1,4 +1,5 @@
 ---
+import Button from '../components/Button.astro';
 import { meetingDaysPhrase } from '../data/utils';
 const base = import.meta.env.BASE_URL;
 ---
@@ -7,12 +8,20 @@ const base = import.meta.env.BASE_URL;
     <source src={`${base}videos/demonstration.mp4`} type="video/mp4">
   </video>
   <div class="hero-content">
-    <div class="hero-badge">EST. 1990's</div>
+    <div class="hero-badge">
+      <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+        <circle cx="8" cy="8" r="6"/>
+        <circle cx="8" cy="8" r="3"/>
+        <path d="M8 2 L8 14" opacity="0.4"/>
+        <path d="M2 8 L14 8" opacity="0.4"/>
+      </svg>
+      EST. 1990's
+    </div>
     <h1>Craft. Creativity.<br>Community.</h1>
     <p>Sharing woodturning expertise, techniques, and camaraderie {meetingDaysPhrase()} in Stony Stratford.</p>
     <div class="hero-buttons">
-      <a href="#about" class="btn btn-primary">Discover More</a>
-      <a href="#contact" class="btn btn-outline">Join Us</a>
+      <Button href="#about" variant="primary" size="lg">Discover More</Button>
+      <Button href="#contact" variant="outline" size="lg">Join Us</Button>
     </div>
   </div>
 </section>
@@ -32,23 +41,15 @@ const base = import.meta.env.BASE_URL;
   .hero::after {
     content: ''; position: absolute; inset: 0; z-index: 1;
     background:
-      radial-gradient(ellipse at 100% 100%, rgba(0,0,0,0.2) 0%, transparent 10%);
+      radial-gradient(ellipse at 100% 100%, rgba(60,30,10,0.3) 0%, transparent 30%);
   }
   .hero::before {
     content: ''; position: absolute; inset: 0; z-index: 2;
-    background: linear-gradient(135deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.6) 100%);
+    background: linear-gradient(135deg, rgba(20,16,12,0.15) 0%, rgba(20,16,12,0.3) 50%, rgba(20,16,12,0.5) 100%);
   }
   .hero-content {
     position: relative; z-index: 3; max-width: 800px;
     text-shadow: 0 2px 20px rgba(0, 0, 0, 1.0);
-  }
-  .hero-badge {
-    display: inline-block; padding: 0.4rem 1.2rem; border-radius: 100px;
-    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; 
-    border: 1px solid rgba(255, 255, 255, 0.5); color: #ffffff;
-    background: rgba(0,0,0,0.3);
-    backdrop-filter: blur(4px);
-    margin-bottom: 1.5rem;
   }
   .hero h1 {
     font-family: 'Playfair Display', serif;
@@ -57,26 +58,22 @@ const base = import.meta.env.BASE_URL;
     color: #fff;
     text-shadow: 0 2px 24px rgba(0,0,0,0.5);
   }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 1.2rem; border-radius: 100px;
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em;
+    border: 1px solid rgba(166,124,82,0.4); color: #c4956a;
+    background: rgba(20,16,12,0.6);
+    backdrop-filter: blur(4px);
+    margin-bottom: 1.5rem;
+  }
   .hero p {
-    font-size: 1.2rem; color: rgba(255,255,255,0.85);
+    font-size: 1.2rem; color: rgba(227,221,213,0.85);
     max-width: 620px; margin: 0 auto 2.5rem;
     font-weight: 400;
     text-shadow: 0 1px 12px rgba(0,0,0,0.6);
   }
   .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-  .btn {
-    padding: 0.85rem 2rem; border-radius: 6px; text-decoration: none;
-    font-size: 0.9rem; font-weight: 500; transition: all 0.3s;
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.35);
-  }
-  .btn-primary {
-    background: #a67c52; color: #fff;
-  }
-  .btn-primary:hover { background: #b88d63; transform: translateY(-1px); box-shadow: 0 6px 24px rgba(0,0,0,0.45); }
-  .btn-outline {
-    border: none; color: #1a1816;
-    background: #fff;
-  }
-  .btn-outline:hover { background: #e8e6e3; color: #1a1816; transform: translateY(-1px); box-shadow: 0 6px 24px rgba(0,0,0,0.45); }
 </style>

@@ -29,10 +29,32 @@ const pageDescription = description || `North Bucks Woodturning Club — sharing
     html { scroll-behavior: smooth; }
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #0a0a0b;
-      color: #e8e6e3;
+      background: #14100c;
+      color: #e3ddd5;
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 1px,
+          rgba(100, 60, 30, 0.025) 1px,
+          rgba(100, 60, 30, 0.025) 2px
+        ),
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 40px,
+          rgba(80, 45, 20, 0.018) 40px,
+          rgba(80, 45, 20, 0.018) 41px
+        );
     }
     ::selection { background: #a67c52; color: #fff; }
 
@@ -42,13 +64,13 @@ const pageDescription = description || `North Bucks Woodturning Club — sharing
       box-shadow: 0 -6px 24px rgba(0,0,0,0.5), 0 6px 24px rgba(0,0,0,0.5);
       z-index: 1;
     }
-    .section-dark { background: #0e0e10; }
-    .section-divider { background: linear-gradient(180deg, #0a0a0b, #0e0e10); }
+    .section-dark { background: #1a1510; }
+    .section-divider { background: linear-gradient(180deg, #14100c, #1a1510); }
     .container { max-width: 1100px; margin: 0 auto; }
 
     .section-label {
       font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
-      color: #a67c52; margin-bottom: 0.75rem;
+      color: #a67c52; margin-bottom: 0.5rem;
     }
     .section-title {
       font-family: 'Playfair Display', serif;
@@ -56,14 +78,39 @@ const pageDescription = description || `North Bucks Woodturning Club — sharing
       margin-bottom: 1rem; color: #fff;
     }
     .section-sub {
-      color: rgba(232,230,227,0.5); font-size: 1rem; font-weight: 300;
+      color: rgba(227,221,213,0.5); font-size: 1rem; font-weight: 300;
       max-width: 600px; margin-bottom: 3rem;
+    }
+
+    .wood-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+    .wood-divider .line {
+      flex: 1;
+      max-width: 60px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(166,124,82,0.3), transparent);
+    }
+    .wood-divider svg {
+      color: #a67c52;
+      opacity: 0.6;
     }
 
     footer {
       text-align: center; padding: 3rem 2rem;
-      border-top: 1px solid rgba(255,255,255,0.05);
-      color: rgba(232,230,227,0.3); font-size: 0.8rem;
+      border-top: 1px solid rgba(166,124,82,0.1);
+      color: rgba(227,221,213,0.3); font-size: 0.8rem;
+    }
+    footer::before {
+      content: '⚘';
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      opacity: 0.2;
     }
 
     @media (max-width: 768px) {
@@ -154,10 +201,10 @@ const pageDescription = description || `North Bucks Woodturning Club — sharing
     window.addEventListener('scroll', () => {
       if (!ticking) {
         requestAnimationFrame(() => {
-          const viewportCenter = window.innerHeight / 2;
-          document.querySelectorAll('.parallax-inner').forEach(el => {
+          document.querySelectorAll('[data-parallax-speed]').forEach(el => {
             const rect = el.parentElement.getBoundingClientRect();
-            const speed = parseFloat(el.dataset.speed) || 0.3;
+            const speed = parseFloat(el.dataset.parallaxSpeed) || 0.3;
+            const viewportCenter = window.innerHeight / 2;
             const dist = rect.top + rect.height / 2 - viewportCenter;
             el.style.transform = `translate3d(0, ${dist * speed}px, 0)`;
           });

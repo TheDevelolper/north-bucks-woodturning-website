@@ -1,4 +1,5 @@
 ---
+import Button from '../components/Button.astro';
 const base = import.meta.env.BASE_URL;
 ---
 <nav>
@@ -11,51 +12,46 @@ const base = import.meta.env.BASE_URL;
     <li><a href={`${base}faqs/`}>FAQs</a></li>
     <li><a href={`${base}gallery/`}>Gallery</a></li>
     <li><a href={`${base}links/`}>Links</a></li>
-    <li><a href={`${base}contact/`} class="nav-cta">Contact</a></li>
+    <li><Button href={`${base}contact/`} variant="primary" size="sm">Contact</Button></li>
   </ul>
 </nav>
 
-<style is:global>
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    padding: 1.2rem 2rem;
-    display: flex; justify-content: space-between; align-items: center;
-    background: rgba(10,10,11,0.85);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-  }
-  nav .logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem; font-weight: 600;
-    color: #fff;
-    text-decoration: none;
-  }
-  nav .logo span { color: #d4a76a; }
-  nav .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
-  nav .nav-links a {
-    color: rgba(232,230,227,0.7); text-decoration: none; font-size: 0.85rem;
-    font-weight: 400; letter-spacing: 0.05em; text-transform: uppercase;
-    transition: color 0.3s;
-  }
-  nav .nav-links a:hover { color: #a67c52; }
-  .nav-cta {
-    background: #a67c52; color: #fff !important; padding: 0.5rem 1.2rem;
-    border-radius: 4px; font-size: 0.8rem !important;
-    transition: background 0.3s !important;
-  }
-  .nav-cta:hover { background: #b88d63 !important; }
-  .mobile-toggle { display: none; flex-direction: column; gap: 4px; cursor: pointer; background: none; border: none; }
-  .mobile-toggle span { width: 24px; height: 2px; background: #e8e6e3; transition: 0.3s; }
-
-  @media (max-width: 768px) {
-    nav .nav-links { display: none; }
-    .mobile-toggle { display: flex; }
-    .nav-links.open {
-      display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0;
-      background: rgba(10,10,11,0.98); padding: 1.5rem 2rem; gap: 1.2rem;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+  <style is:global>
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1.2rem 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(20,16,12,0.88);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(166,124,82,0.08);
     }
-  }
+    nav .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem; font-weight: 600;
+      color: #fff;
+      text-decoration: none;
+    }
+    nav .logo span { color: #c4956a; }
+    nav .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+    nav .nav-links a {
+      color: rgba(227,221,213,0.7); text-decoration: none; font-size: 0.85rem;
+      font-weight: 400; letter-spacing: 0.05em; text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    nav .nav-links a:hover { color: #c4956a; }
+    nav .nav-links a.btn-sm { border-radius: 4px; }
+    .mobile-toggle { display: none; flex-direction: column; gap: 4px; cursor: pointer; background: none; border: none; }
+    .mobile-toggle span { width: 24px; height: 2px; background: #e3ddd5; transition: 0.3s; }
+
+    @media (max-width: 768px) {
+      nav .nav-links { display: none; }
+      .mobile-toggle { display: flex; }
+      .nav-links.open {
+        display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(20,16,12,0.98); padding: 1.5rem 2rem; gap: 1.2rem;
+        border-bottom: 1px solid rgba(166,124,82,0.08);
+      }
+    }
 </style>
 
 <script>

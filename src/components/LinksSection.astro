@@ -1,4 +1,5 @@
 ---
+import WoodDivider from '../components/WoodDivider.astro';
 const { content } = Astro.props;
 
 const body = content.body || '';
@@ -17,6 +18,7 @@ while ((m = linkRegex.exec(body)) !== null) {
 <section class="section section-divider" id="links">
   <div class="container">
     <div class="section-label" data-animate>Resources</div>
+    <WoodDivider />
     <h2 class="section-title" data-animate>Useful Links</h2>
     <p class="section-sub" data-animate>Trusted suppliers, associations, and resources for the woodturning community.</p>
     <div class="links-grid" data-stagger>
@@ -38,16 +40,17 @@ while ((m = linkRegex.exec(body)) !== null) {
     display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem;
   }
   .link-card {
-    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+    background: rgba(60,40,25,0.2); border: 1px solid rgba(166,124,82,0.1);
     border-radius: 10px; padding: 1.2rem 1.5rem; text-decoration: none;
     display: flex; justify-content: space-between; align-items: center;
-    transition: all 0.3s; color: #e8e6e3;
+    transition: all 0.3s; color: #e3ddd5;
   }
   .link-card:hover {
-    border-color: rgba(166,124,82,0.3); background: rgba(166,124,82,0.05);
+    border-color: rgba(166,124,82,0.3); background: rgba(80,50,30,0.3);
     transform: translateX(4px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
   }
   .link-card .link-name { font-weight: 500; font-size: 0.95rem; }
-  .link-card .link-desc { color: rgba(232,230,227,0.45); font-size: 0.8rem; }
+  .link-card .link-desc { color: rgba(227,221,213,0.45); font-size: 0.8rem; }
   .link-card .link-arrow { color: #a67c52; font-size: 1.2rem; }
 </style>

@@ -1,0 +1,77 @@
+---
+export interface Props {
+  href?: string;
+  variant?: 'primary' | 'outline' | 'ghost';
+  size?: 'sm' | 'md' | 'lg';
+  type?: 'button' | 'submit' | 'reset';
+}
+
+const { href, variant = 'primary', size = 'md', type = 'button' } = Astro.props;
+const Tag = href ? 'a' : 'button';
+const cls = `btn btn-${variant} btn-${size}`;
+---
+
+{Tag === 'a'
+  ? <a href={href} class={cls}><slot /></a>
+  : <button type={type} class={cls}><slot /></button>
+}
+
+<style is:global>
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s;
+    border-radius: 8px;
+  }
+  .btn:active { transform: scale(0.97); }
+
+  .btn-lg {
+    padding: 0.85rem 2rem;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+  }
+  .btn-lg:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,0.45); }
+
+  .btn-md {
+    padding: 0.9rem 2rem;
+    font-size: 0.9rem;
+    border-radius: 8px;
+  }
+
+  .btn-sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    border-radius: 6px;
+  }
+
+  .btn-primary {
+    background: #a67c52;
+    color: #fff;
+    border: none;
+  }
+  .btn-primary:hover { background: #b88d63; }
+
+  .btn-outline {
+    background: rgba(20,16,12,0.5);
+    color: #c4956a;
+    border: 1px solid rgba(166,124,82,0.3);
+    backdrop-filter: blur(4px);
+  }
+  .btn-outline:hover {
+    background: rgba(20,16,12,0.8);
+    border-color: #c4956a;
+    color: #c4956a;
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: #c4956a;
+    border: none;
+    padding: 0.25rem 0.5rem;
+  }
+  .btn-ghost:hover { color: #d4a87a; }
+</style>

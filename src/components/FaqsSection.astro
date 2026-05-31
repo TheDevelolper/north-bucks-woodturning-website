@@ -1,5 +1,6 @@
 ---
 const { content } = Astro.props;
+import WoodDivider from '../components/WoodDivider.astro';
 import { site } from '../data/site';
 
 const body = content.body || '';
@@ -26,6 +27,7 @@ for (let i = 0; i < lines.length; i++) {
 <section class="section section-divider" id="faqs">
   <div class="container">
     <div class="section-label">{content.data.title}</div>
+    <WoodDivider />
     <h2 class="section-title">Everything You Need to Know</h2>
     <p class="section-sub">Got questions? We've got answers.</p>
     <div class="cards-grid">
@@ -44,15 +46,16 @@ for (let i = 0; i < lines.length; i++) {
     display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem;
   }
   .faq-card {
-    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+    background: rgba(60,40,25,0.2); border: 1px solid rgba(166,124,82,0.1);
     border-radius: 12px; padding: 1.8rem;
     transition: all 0.3s;
   }
   .faq-card:hover {
-    border-color: rgba(166,124,82,0.2); background: rgba(166,124,82,0.03);
-    transform: translateY(-2px);
+    border-color: rgba(166,124,82,0.25); background: rgba(80,50,30,0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
   }
   .faq-card h4 { color: #fff; font-size: 1rem; font-weight: 600; margin-bottom: 0.6rem; }
-  .faq-card p { color: rgba(232,230,227,0.55); font-size: 0.9rem; line-height: 1.6; }
+  .faq-card p { color: rgba(227,221,213,0.55); font-size: 0.9rem; line-height: 1.6; }
   .faq-card strong { color: #a67c52; }
 </style>
