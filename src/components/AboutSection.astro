@@ -1,6 +1,5 @@
 ---
-const { content, base: baseUrl } = Astro.props;
-const base = baseUrl;
+const { content } = Astro.props;
 
 const body = content.body || '';
 const parts = body.split(/\n(?=### )/);
@@ -43,27 +42,11 @@ function mdToHtml(text: string) {
           const mapsUrl = d.heading === 'Where'
             ? `https://www.google.com/maps?q=${encodeURIComponent(d.body.replace(/<[^>]*>/g, '').replace(/\n/g, ' '))}`
             : null;
-          const calIcsUrl = d.heading === 'When' ? base + 'nbwc-sessions.ics' : null;
           return (
             <div class="detail-card" data-animate>
               <h4>{d.heading}</h4>
               <Fragment set:html={mdToHtml(d.body)} />
               {mapsUrl && <Button href={mapsUrl} variant="primary" size="sm">Open in Google Maps</Button>}
-              {calIcsUrl && <Button href={calIcsUrl} variant="primary" size="sm">Add to Calendar</Button>}
-
-<script>
-  document.addEventListener('click', (e) => {
-    const btn = e.target.closest('.calendar-btn');
-    if (!btn) return;
-    e.preventDefault();
-    const icsUrl = 'https://' + location.host + btn.getAttribute('href');
-    if (/iphone|ipad|mac/i.test(navigator.userAgent)) {
-      window.location.href = 'webcal://' + location.host + btn.getAttribute('href');
-    } else {
-      window.location.href = icsUrl;
-    }
-  });
-</script>
             </div>
           );
         })}

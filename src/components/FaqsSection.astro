@@ -2,25 +2,31 @@
 const { content } = Astro.props;
 import WoodDivider from '../components/WoodDivider.astro';
 import { site } from '../data/site';
+import openingTimesRaw from '../content/sections/_opening-times.md?raw';
+
+const openingTimes = openingTimesRaw.trim().replace(/\n/g, '<br>');
 
 const body = content.body || '';
 const lines = body.split('\n');
 const items: { q: string; a: string }[] = [];
 for (let i = 0; i < lines.length; i++) {
   const line = lines[i].trim();
-  if (line && !line.startsWith(':')) {
-    const q = line;
-    const next = lines[i + 1]?.trim();
-    if (next?.startsWith(': ')) {
-      let a = next.slice(2).trim()
-        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-      if (q === 'How much does it cost?') {
-        a = `Annual <strong>AWGB membership</strong> is £${site.membershipAnnualFee}, then monthly subs are £${site.membershipMonthlyFee} per month.`;
-      }
-      items.push({ q, a });
-      i++;
-    }
+  if (!line || line.startsWith(':')) continue;
+  const q = line;
+  const next = lines[i + 1]?.trim();
+  let a = '';
+  if (next?.startsWith(': ')) {
+    a = next.slice(2).trim()
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    i++;
   }
+  if (q === 'How much does it cost?') {
+    a = `Annual <strong>AWGB membership</strong> is £${site.membershipAnnualFee}, then monthly subs are £${site.membershipMonthlyFee} per month.`;
+  }
+  if (q === 'When do you meet?') {
+    a = openingTimes;
+  }
+  items.push({ q, a });
 }
 ---
 
